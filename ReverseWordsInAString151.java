@@ -67,9 +67,28 @@ public class ReverseWordsInAString151 {
             w.setCharAt(end--, temp);
         }
     }
-
+    //improvement
+    public static String reverseWords1(String s){
+        String result = "";
+        int i = 0;
+        int j = 0;
+        while(i < s.length()) {
+            while (i < s.length() && s.charAt(i) == ' ') {
+                i++;
+            }
+            j = i;
+            while (j < s.length() && s.charAt(j) != ' ') {
+                j++;
+            }
+            if(i < s.length()) {
+                result = s.substring(i, j) + " " + result;
+                i = j;
+            }
+        }
+        return result.substring(0 , result.length() - 1);
+    }
     public static void main(String[] args) {
-        String s = "the  sky   is blue   ";
-        System.out.println(reverseWords(s));
+        String s = "  the  sky   is blue   ";
+        System.out.println(reverseWords1(s));
     }
 }
