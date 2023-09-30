@@ -3,7 +3,7 @@ import java.util.Queue;
 
 public class NumberofRecentCalls933 {
     Queue<Integer> q;
-    public RecentCounter() {
+    public void RecentCounter() {
         q = new LinkedList();
     }
 
