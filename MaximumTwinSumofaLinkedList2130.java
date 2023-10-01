@@ -12,7 +12,7 @@ public class MaximumTwinSumofaLinkedList2130 {
           ListNode(int val, ListNode next) { this.val = val; this.next = next; }
       }
     class Solution {
-        public int pairSum(ListNode head) {
+        public int pairSum1(ListNode head) {
             //use a stack to store int
             //use fast&slow pointer to get to the middle
             //from the middle, add slow.val with each stack pop then compare with max(inital 0 )
@@ -33,6 +33,39 @@ public class MaximumTwinSumofaLinkedList2130 {
                 //System.out.println("sum is: " + sum);
                 max = sum > max ? sum : max;
                 slow = slow.next;
+            }
+            return max;
+        }
+
+        public int pairSum(ListNode head) {
+            //to avoid extra space use, we reverse the last half link
+            //fast&slow pointer to reach middle
+            ListNode fast = head;
+            ListNode slow = head;
+            while(fast != null){
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+            //now slow is the head of last half link
+            //set pre and temp
+            ListNode pre = null;
+            ListNode temp = null;
+            while(slow != null){
+                //use temp to link the rest of the link
+                temp = slow.next;
+                //slow->pre
+                slow.next = pre;
+                //move
+                pre = slow;
+                slow = temp;
+            }
+            //pre is the new head of last half link
+            int max = 0;
+            while(pre != null){
+                int sum = head.val + pre.val;
+                max = sum > max ? sum : max;
+                head = head.next;
+                pre = pre.next;
             }
             return max;
         }
