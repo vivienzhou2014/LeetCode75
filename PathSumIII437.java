@@ -108,7 +108,14 @@ public class PathSumIII437 {
             return count;
         }
 
-        /*int result = 0;
+        /*
+        //This is an optimized method combined with presum
+        //idea of presum is presum[j] - presum[i] = target -> presum[j] = presum[i]+target
+        //same here, presum as a hashmap, the key is node.val+target, value is what we add to result
+        //add 1 in value for node.val+target to match presum and count result before go into dfs
+        //remove 1 in value after one node's dfs is done and return to its parent node
+
+        int result = 0;
         HashMap<Long, Integer> presum = new HashMap<>();
         public int pathSum(TreeNode root, int targetSum) {
             presum.put(Long.valueOf(targetSum), 1);
